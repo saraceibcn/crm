@@ -10,7 +10,9 @@ mail = Mail()
 def create_app():
     app = Flask(__name__)
     app.config.from_object('config.Config')
-
+    @app.route("/health")
+    def health():
+        return {"status": "healthy"}
     CORS(app, resources={r"/api/*": {"origins": "*"}})
 
     mail.init_app(app)
